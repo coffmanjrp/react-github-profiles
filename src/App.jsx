@@ -6,7 +6,7 @@ const clientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
 
 function App() {
   const [username, setUsername] = useState('');
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
   const [repos, setRepos] = useState([]);
   const [error, setError] = useState(false);
   const [message, setMessage] = useState('');
@@ -18,8 +18,15 @@ function App() {
       );
       const data = await res.json();
 
-      setUser(data);
+      if (data.message === 'Not Found') {
+        setError(true);
+        setMessage('No profile with this user name.');
+      } else {
+        setError(false);
+        setUser(data);
+      }
     } catch (err) {
+      console.error(err);
       setError(true);
       setMessage('No profile with this user name.');
     }
@@ -46,6 +53,8 @@ function App() {
     fetchRepos(username);
   };
 
+  console.log(user);
+
   return (
     <div className="App">
       <form className="user-form" onSubmit={(e) => handleSubmit(e)}>
@@ -63,7 +72,7 @@ function App() {
           </div>
         ) : (
           <>
-            {user.length > 0 ? (
+            {user ? (
               <div className="card">
                 <div>
                   <img
@@ -86,21 +95,21 @@ function App() {
                       {user.public_repos} <strong>Repos</strong>
                     </li>
                   </ul>
-
-                  <div id="repos"></div>
+                  <div id="repos">
+                    {repos.length > 0 &&
+                      repos.slice(0, 10).map((repo) => (
+                        <a
+                          key={repo.id}
+                          href={repo.html_url}
+                          className="repo"
+                          target="_blank"
+                          rel="noreferrer nofollow"
+                        >
+                          {repo.name}
+                        </a>
+                      ))}
+                  </div>
                 </div>
-                {repos.length > 0 &&
-                  repos.map((repo) => (
-                    <a
-                      key={repo.id}
-                      href={repo.html_url}
-                      className="repo"
-                      target="_blank"
-                      rel="noreferrer nofollow"
-                    >
-                      {repo.name}
-                    </a>
-                  ))}
               </div>
             ) : (
               ''
