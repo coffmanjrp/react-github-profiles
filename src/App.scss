@@ -1,38 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #2a2a72;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  overflow: hidden;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.user-form {
+  width: 100%;
+  max-width: 800px;
+  input {
+    display: block;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    width: 100%;
+    background-color: #4c2885;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+      0 15px 40px rgba(0, 0, 0, 0.1);
+    font-family: inherit;
+    font-size: 1rem;
+    color: #fff;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: #bbb;
+    }
   }
-  to {
-    transform: rotate(360deg);
+}
+
+.card {
+  display: flex;
+  margin: 0 1.5rem;
+  padding: 3rem;
+  max-width: 800px;
+  background-color: #4c2885;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+    0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border: 10px solid #2a2a72;
+  border-radius: 50%;
+}
+
+.user-info {
+  margin-left: 2rem;
+  color: #eee;
+  > * {
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    margin-top: 0;
+  }
+  ul {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 400px;
+    list-style-type: none;
+    li {
+      display: flex;
+      align-items: center;
+      strong {
+        margin-left: 0.5rem;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.repo {
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background-color: #2a2872;
+  font-size: 0.7rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+@media (max-width: 500px) {
+  .card {
+    flex-direction: column;
+    align-items: center;
+  }
+  .user-form {
+    max-width: 400px;
   }
 }
